@@ -1,0 +1,236 @@
+﻿<Page x:Class="CazinoProjectSlepPas.Pages.CrashPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="Crash Game">
+
+    <Page.Resources>
+        <!-- Общие стили -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="ModernTextBox">
+            <Setter Property="Background" Value="#2D2D4D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8"
+                                BorderBrush="#6A6A9E"
+                                BorderThickness="1">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AnimatedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#4C4C7A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="8"
+                                Padding="10,5">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="buttonScale" ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Button.PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                                     Storyboard.TargetProperty="ScaleX"
+                                                     To="0.95" Duration="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                                     Storyboard.TargetProperty="ScaleY"
+                                                     To="0.95" Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                                     Storyboard.TargetProperty="ScaleX"
+                                                     To="1" Duration="0:0:0.1"/>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                                     Storyboard.TargetProperty="ScaleY"
+                                                     To="1" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5C5C8A"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Opacity="0.3" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DisabledButtonStyle" BasedOn="{StaticResource AnimatedButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#4C4C7A"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Основное содержимое с увеличенными боковыми отступами -->
+        <Grid Margin="50,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- График игры с увеличенными отступами -->
+            <Border Grid.Column="0" 
+                    Background="#2A2A4A" 
+                    CornerRadius="10"
+                    Padding="20"
+                    Margin="81,0,20,0"
+                    BorderThickness="0">
+                <Canvas Name="GraphCanvas" ClipToBounds="True"/>
+            </Border>
+
+            <!-- Панель управления -->
+            <Border Grid.Column="1" 
+                    Background="#2A2A4A"
+                    CornerRadius="0 20 0 20"
+                    Padding="20" Margin="0,0,60,0">
+                <StackPanel>
+                    <TextBlock Text="CRASH" 
+                               FontSize="24" 
+                               FontWeight="Bold"
+                               Margin="0,0,0,20"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Ваша ставка:" 
+                               Margin="0,0,0,10"
+                               FontSize="14"/>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="BetAmountTextBox" 
+                                 Style="{StaticResource ModernTextBox}"
+                                 Width="150"
+                                 Text="100"
+                                 VerticalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    <Button Name="BetButton" 
+                            Content="Поставить" 
+                            Style="{StaticResource AnimatedButtonStyle}"
+                            Margin="0,25,0,15"
+                            Height="45"
+                            FontSize="16"
+                            Click="BetButton_Click"
+                            VerticalContentAlignment="Center"/>
+
+                    <Button Name="PlayButton" 
+                            Content="Играть" 
+                            Style="{StaticResource AnimatedButtonStyle}"
+                            Margin="0,0,0,15" 
+                            Height="45"
+                            FontSize="16"
+                            Click="PlayButton_Click"/>
+
+                    <Button Name="CashOutButton" 
+                            Content="Забрать" 
+                            Style="{StaticResource DisabledButtonStyle}"
+                            Margin="0,0,0,15" 
+                            Height="45"
+                            FontSize="16"
+                            Click="CashOutButton_Click" 
+                            IsEnabled="False" MouseEnter="CasinoAlwaysWin"
+                            />
+
+                    <Border Background="#3A3A6A" 
+                            CornerRadius="8"
+                            Padding="15"
+                            Margin="0,15,0,0">
+                        <StackPanel>
+                            <TextBlock Name="MultiplierText" 
+                                       Text="Множитель: 1.00x" 
+                                       FontSize="18" 
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Name="StatusText" 
+                                       Text="Сделайте ставку" 
+                                       Margin="0,8,0,0"
+                                       FontSize="14"
+                                       Foreground="#A6A8D5"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- История игр с увеличенными боковыми отступами -->
+        <Border Grid.Row="1" 
+                Background="#2A2A4A"
+                CornerRadius="10"
+                Margin="130,10,110,30"
+                Padding="15">
+            <StackPanel>
+                <TextBlock Text="ИСТОРИЯ ИГР" 
+                           FontWeight="Bold" 
+                           FontSize="16"
+                           Margin="0,0,0,10"
+                           HorizontalAlignment="Center"/>
+                <ListView Name="HistoryListView" 
+                          Height="120"
+                          Background="Transparent"
+                          BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="Transparent" Padding="5">
+                                            <ContentPresenter/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="14" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

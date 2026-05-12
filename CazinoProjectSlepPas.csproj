@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Img\BackBlueFon.jpg" />
+    <None Remove="Img\BackGoldTop.png" />
+    <None Remove="Img\BackGoldTop22.png" />
+    <None Remove="Img\HorizTopAcademyAdd.jpg" />
+    <None Remove="Img\photo_5375261617052316277_y.jpg" />
+    <None Remove="Img\TopAcademyHoriz.jpg" />
+    <None Remove="Img\TopAcademyHoriz2.jpg" />
+    <None Remove="Img\TopAcademyVert.jpg" />
+    <None Remove="Img\VerticTopAcademyAdd.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Img\BackBlueFon.jpg" />
+    <Resource Include="Img\BackGoldTop.png" />
+    <Resource Include="Img\BackGoldTop22.png" />
+    <Resource Include="Img\HorizTopAcademyAdd.jpg" />
+    <Resource Include="Img\photo_5375261617052316277_y.jpg" />
+    <Resource Include="Img\TopAcademyHoriz.jpg" />
+    <Resource Include="Img\TopAcademyHoriz2.jpg" />
+    <Resource Include="Img\TopAcademyVert.jpg" />
+    <Resource Include="Img\VerticTopAcademyAdd.jpg" />
+  </ItemGroup>
+
+</Project>

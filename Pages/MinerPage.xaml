@@ -1,0 +1,225 @@
+﻿<Page x:Class="CazinoProjectSlepPas.Pages.MinerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CazinoProjectSlepPas.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="MinerPage">
+
+    <Page.Resources>
+        <Style x:Key="MinerButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="5"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="ModernTextBox">
+            <Setter Property="Background" Value="#2D2D4D"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                        CornerRadius="8"
+                        BorderBrush="#6A6A9E"
+                        BorderThickness="1">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="AnimatedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#4C4C7A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                        Background="{TemplateBinding Background}" 
+                        CornerRadius="8"
+                        Padding="10,5">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="buttonScale" ScaleX="1" ScaleY="1"/>
+                            </Border.RenderTransform>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Button.PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             To="0.95" Duration="0:0:0.05"/>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             To="0.95" Duration="0:0:0.05"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             To="1" Duration="0:0:0.1"/>
+                                        <DoubleAnimation Storyboard.TargetName="buttonScale"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             To="1" Duration="0:0:0.1"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5C5C8A"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" Opacity="0.3" ShadowDepth="2"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DisabledButtonStyle" BasedOn="{StaticResource AnimatedButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="#3A3A5A"/>
+            <Setter Property="Foreground" Value="#A0A0A0"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="10">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#B22D2D4D" Margin="400,100,400,150" CornerRadius="15">
+            
+            
+            <UniformGrid Grid.Column="0" Rows="5" Columns="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- Ряд 0 -->
+                <Button x:Name="Cell00" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="0,0" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell01" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="0,1" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell02" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="0,2" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell03" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="0,3" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell04" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="0,4" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+
+                <!-- Ряд 1 -->
+                <Button x:Name="Cell10" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="1,0" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell11" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="1,1" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell12" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="1,2" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell13" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="1,3" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell14" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="1,4" FontSize="16" 
+                                    Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+
+                <!-- Ряд 2 -->
+                <Button x:Name="Cell20" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="2,0" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell21" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="2,1" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell22" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="2,2" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell23" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="2,3" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell24" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="2,4" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+
+                <!-- Ряд 3 -->
+                <Button x:Name="Cell30" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="3,0" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell31" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="3,1" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell32" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="3,2" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell33" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="3,3" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell34" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="3,4" FontSize="16" 
+                                    Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+
+                <!-- Ряд 4 -->
+                <Button x:Name="Cell40" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="4,0" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell41" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="4,1" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell42" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="4,2" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell43" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="4,3" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+                <Button x:Name="Cell44" Width="70" Height="70" Margin="4" Click="Cell_Click" Tag="4,4" FontSize="16" 
+                                Background="#FF42469E" Style="{StaticResource MinerButtonStyle}"/>
+            </UniformGrid>
+        </Border>
+        <!-- Игровое поле 5x5 -->
+
+        <!-- Боковая панель управления -->
+        <Border Grid.Column="1" Background="#FF2D2D4D" CornerRadius="10" Padding="15" Margin="10,0,0,0"
+                BorderBrush="#FF42469E" BorderThickness="2">
+            <StackPanel>
+                <TextBlock Text="Минер" FontSize="24" FontWeight="Bold" Foreground="White" 
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <!-- Блок ставки -->
+                <TextBlock Text="Ваша ставка:" FontSize="16" Foreground="White" Margin="0,0,0,5" />
+                <TextBox x:Name="DepositTextBox" Width="200" FontSize="16" Text="100" Margin="0,0,0,15"
+                         Background="#FF2D2D4D" Foreground="White" BorderBrush="#6A6A9E"/>
+
+                <Button x:Name="BetButton" Content="Поставить" Style="{StaticResource AnimatedButtonStyle}"
+                        FontSize="16" Margin="0,0,0,10" Click="BetButton_Click" 
+                         Foreground="White" Width="200" Height="45"/>
+
+                <Button x:Name="PlayButton" Content="Играть" Width="200" Height="50" 
+                        FontSize="18" FontWeight="Bold" Margin="0,0,0,10"
+                        Click="PlayButton_Click" IsEnabled="False"
+                        Background="#FF6A6A9E" Foreground="White"/>
+
+                <!-- Новая кнопка "Забрать" -->
+                <Button x:Name="CashOutButton" Content="Забрать" Width="200" Height="50" 
+                        FontSize="18" FontWeight="Bold" Margin="0,0,0,20"
+                        Click="CashOutButton_Click" IsEnabled="False"
+                        Background="#FF4CAF50" Foreground="White"/>
+
+                <!-- Блок статуса -->
+                <Border BorderThickness="1" CornerRadius="5" Padding="10"
+                        Background="#3A3A6A">
+                    <TextBlock x:Name="StatusText" FontSize="14" FontWeight="Bold" 
+                               TextWrapping="Wrap" TextAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

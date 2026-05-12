@@ -1,0 +1,127 @@
+﻿<Page x:Class="CazinoProjectSlepPas.Pages.MainUsePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CazinoProjectSlepPas.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1366"
+      Title="MainUsePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="155*"/>
+            <ColumnDefinition Width="675*"/>
+            <ColumnDefinition Width="408*"/>
+            <ColumnDefinition Width="68*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.RowSpan="4" 
+            Background="#FF0D1165" 
+            Orientation="Vertical"
+            Width="60"
+            HorizontalAlignment="Left">
+
+            <!-- Стили для кнопок -->
+            <StackPanel.Resources>
+                <!-- Общий стиль кнопок -->
+                <Style TargetType="Button" x:Key="SocialButtonStyle">
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="Width" Value="40"/>
+                    <Setter Property="Margin" Value="10,15,10,0"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" 
+                                CornerRadius="10" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Анимация при наведении -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#301A7AFF"/>
+                                        <Setter TargetName="border" Property="BorderBrush" Value="#4D4DA6FF"/>
+                                        <Setter TargetName="border" Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect BlurRadius="8" ShadowDepth="0" Color="#40000000"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                    <!-- Анимация при нажатии -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#502A8AFF"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <!-- Стиль для иконок -->
+                <Style TargetType="Path" x:Key="IconStyle">
+                    <Setter Property="Stretch" Value="Uniform"/>
+                    <Setter Property="Fill" Value="#AACACACA"/>
+                    <Setter Property="Width" Value="20"/>
+                    <Setter Property="Height" Value="20"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <!-- Telegram -->
+            <Button Style="{StaticResource SocialButtonStyle}" ToolTip="Telegram">
+                <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.25 1.58-1.32 5.42-1.87 7.19-.14.44-.41.55-.68.33-.3-.25-.75-.5-1.47-.82-.8-.35-.98-.58-1.56-.58-.6 0-1.5.27-2.37.5l-.37.1-.36-.12c-.5-.15-1.02-.3-1.02-.63 0-.17.12-.33.36-.5 1.47-1.05 2.45-1.68 3.37-2.45 1.2-1 0.6-1.1-.37-.68l-4.45 1.77c-.45.17-.86-.08-.96-.52-.1-.45.17-.88.6-1.08l5.6-2.38c.22-.1.45-.13.67-.1.23.02.45.1.62.23.17.13.3.3.38.5.1.2.13.42.1.63z"
+              Style="{StaticResource IconStyle}"/>
+            </Button>
+
+            <!-- VK -->
+            <Button Style="{StaticResource SocialButtonStyle}" ToolTip="VK">
+                <Path Data="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm-.84 12.27c-.52.52-1.5 1.55-3.71 1.55-2.21 0-3.19-1.03-3.71-1.55-.2-.2-.2-.52 0-.72.2-.2.52-.2.72 0 .37.37 1.17 1.07 2.99 1.07 1.82 0 2.62-.7 2.99-1.07.2-.2.52-.2.72 0 .19.2.19.52 0 .72zm1.36-3.1c-.2.2-.52.2-.72 0-.37-.37-1.17-1.07-2.99-1.07-1.82 0-2.62.7-2.99 1.07-.2.2-.52.2-.72 0-.2-.2-.2-.52 0-.72.52-.52 1.5-1.55 3.71-1.55 2.21 0 3.19 1.03 3.71 1.55.2.2.2.52 0 .72zm3.36-3.1c-.2.2-.52.2-.72 0-.37-.37-1.17-1.07-2.99-1.07-1.82 0-2.62.7-2.99 1.07-.2.2-.52.2-.72 0-.2-.2-.2-.52 0-.72.52-.52 1.5-1.55 3.71-1.55 2.21 0 3.19 1.03 3.71 1.55.2.2.2.52 0 .72z"
+              Style="{StaticResource IconStyle}"/>
+            </Button>
+
+            <!-- YouTube -->
+            <Button Style="{StaticResource SocialButtonStyle}" ToolTip="YouTube">
+                <Path Data="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"
+              Style="{StaticResource IconStyle}"/>
+            </Button>
+
+            <!-- Discord -->
+            <Button Style="{StaticResource SocialButtonStyle}" ToolTip="Discord">
+                <Path Data="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.84 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.92 1.92 0 0 1-1.8 2z"
+              Style="{StaticResource IconStyle}"/>
+            </Button>
+
+            <!-- Support -->
+            <Button Style="{StaticResource SocialButtonStyle}" ToolTip="Поддержка" Margin="10,15,10,20">
+                <Path Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
+              Style="{StaticResource IconStyle}"/>
+            </Button>
+        </StackPanel>
+
+        <Border Grid.Column="2" Grid.Row="1" BorderBrush="White" BorderThickness="1" Margin="5">
+            <Image Source="/Img/TopAcademyHoriz.jpg" Margin="3" Stretch="UniformToFill"/>
+        </Border>
+
+        <Border Grid.Column="2" Grid.Row="2" BorderBrush="White" BorderThickness="1" Margin="5">
+            <Image Source="/Img/HorizTopAcademyAdd.jpg" Margin="3" Stretch="UniformToFill"/>
+        </Border>
+
+        <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" BorderBrush="White" BorderThickness="1" Margin="5">
+            <Image Source="/Img/VerticTopAcademyAdd.jpg" Margin="3" Stretch="UniformToFill"/>
+
+        </Border>
+
+    </Grid>
+</Page>
