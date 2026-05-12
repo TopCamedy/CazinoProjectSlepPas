@@ -27,10 +27,3 @@
 * **Платформа:** Windows Presentation Foundation (WPF)
 * **Framework:** .NET 8.0
 * **Паттерны:** Базовая реализация MVVM (уведомления об изменении свойств).
-
----
-
-### 🚀 Инструкция по запуску
-1. Склонируйте репозиторий:
-   ```bash
-   git clone [https://github.com/TopCamedy/CazinoProjectSlepPas.git](https://github.com/TopCamedy/CazinoProjectSlepPas.git)
